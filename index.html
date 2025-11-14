@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>요기요_롯데GRS 마케팅 통합 성과 리포트</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+    <title>요기요 롯데리아 할인 타겟 마케팅 분석 레포트 (20-39세 수도권)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
 
@@ -90,45 +90,109 @@
         padding: 40px;
       }
 
-      .executive-summary {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-        padding: 40px;
+      .section-box {
+        background: white;
         border-radius: 12px;
-        margin-bottom: 50px;
-        box-shadow: 0 6px 20px rgba(245, 87, 108, 0.3);
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 5px solid #667eea;
+        scroll-margin-top: 20px;
       }
 
-      .executive-summary h2 {
+      .section-box h2 {
+        color: #2c3e50;
         font-size: 1.8em;
         margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
         font-weight: 600;
       }
 
-      .summary-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        margin-top: 25px;
-      }
-
-      .summary-card {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        padding: 25px;
+      .insight-box {
+        background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+        border-left: 5px solid #00acc1;
+        padding: 30px;
+        margin: 30px 0;
         border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 172, 193, 0.15);
       }
 
-      .summary-card h3 {
+      .insight-box h4 {
+        color: #00838f;
         font-size: 1.1em;
         margin-bottom: 12px;
         font-weight: 600;
       }
 
-      .summary-card p {
+      .insight-box p {
+        color: #006064;
+        margin-bottom: 12px;
+        line-height: 1.8;
+      }
+
+      .insight-box ul {
+        color: #006064;
+        margin-left: 20px;
+        margin-bottom: 12px;
+        line-height: 1.8;
+      }
+
+      .insight-box li {
+        margin-bottom: 8px;
+      }
+
+      .chart-container {
+        margin: 30px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        min-height: 400px;
+        position: relative;
+      }
+
+      .chart-container canvas {
+        height: 400px !important;
+        width: 100% !important;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 30px 0;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      th {
+        padding: 18px 15px;
+        text-align: center;
+        font-weight: 600;
         font-size: 0.95em;
-        line-height: 1.7;
+      }
+
+      td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 0.9em;
+      }
+
+      tbody tr {
+        background: white;
+        transition: background 0.3s;
+      }
+
+      tbody tr:hover {
+        background: #f5f5f5;
       }
 
       .toc {
@@ -177,193 +241,18 @@
         transform: translateX(10px);
       }
 
-      .section {
-        margin-bottom: 60px;
-        scroll-margin-top: 20px;
-      }
-
-      .section h2 {
-        color: #2c3e50;
-        font-size: 1.8em;
-        margin-bottom: 30px;
-        padding-bottom: 15px;
-        border-bottom: 3px solid #667eea;
-        font-weight: 600;
-      }
-
-      .section h3 {
-        color: #764ba2;
-        font-size: 1.3em;
-        margin: 30px 0 20px;
-        font-weight: 600;
-      }
-
-      .metrics-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-        margin: 30px 0;
-      }
-
-      .metric-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-        transition: transform 0.3s;
-      }
-
-      .metric-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .metric-label {
-        font-size: 0.9em;
-        opacity: 0.9;
-        margin-bottom: 10px;
-      }
-
-      .metric-value {
-        font-size: 2.2em;
-        font-weight: 700;
-        margin-bottom: 5px;
-      }
-
-      .metric-subtitle {
-        font-size: 0.85em;
-        opacity: 0.8;
-      }
-
-      .insight-box {
-        background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
-        border-left: 5px solid #00acc1;
-        padding: 30px;
-        margin: 30px 0;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 172, 193, 0.15);
-      }
-
-      .insight-box h4 {
-        color: #00838f;
-        font-size: 1.1em;
-        margin-bottom: 12px;
-        font-weight: 600;
-      }
-
-      .insight-box p {
-        color: #006064;
-        margin-bottom: 12px;
-        line-height: 1.8;
-      }
-
-      .strategy-box {
-        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-        border-left: 5px solid #ff6f00;
-        padding: 30px;
-        margin: 30px 0;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(255, 111, 0, 0.15);
-      }
-
-      .strategy-box h3 {
-        color: #e65100;
-        font-size: 1.3em;
-        margin-bottom: 20px;
-        font-weight: 600;
-      }
-
-      .strategy-box ul {
-        list-style: none;
-        padding-left: 0;
-      }
-
-      .strategy-box li {
-        padding-left: 30px;
-        position: relative;
-        margin-bottom: 15px;
-        color: #bf360c;
-        line-height: 1.8;
-      }
-
-      .strategy-box li::before {
-        content: "▸";
-        position: absolute;
-        left: 10px;
-        color: #ff6f00;
-        font-weight: 700;
-      }
-
-      .chart-container {
-        margin: 30px 0;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        min-height: 400px;
-      }
-
-      .chart-container > div {
-        min-height: 400px;
-        width: 100%;
-        display: block;
-      }
-
-      .plotly-graph-div,
-      .plotly .svg-container,
-      .plotly .main-svg {
-        width: 100% !important;
-        min-height: 400px !important;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        margin: 30px 0;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      }
-
-      thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-      }
-
-      th {
-        padding: 18px 15px;
-        text-align: center;
-        font-weight: 600;
-        font-size: 0.95em;
-      }
-
-      td {
-        padding: 15px;
-        text-align: center;
-        border-bottom: 1px solid #e0e0e0;
-        font-size: 0.9em;
-      }
-
-      tbody tr {
-        background: white;
-        transition: background 0.3s;
-      }
-
-      tbody tr:hover {
-        background: #f5f5f5;
-      }
-
       .footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 30px 40px;
         text-align: center;
-        margin-top: 50px;
-        padding-top: 30px;
-        border-top: 2px solid #e9ecef;
-        color: #7f8c8d;
+        margin-top: 40px;
       }
 
       .footer p {
         margin: 5px 0;
+        font-size: 0.95em;
+        opacity: 0.9;
       }
 
       @media (max-width: 768px) {
@@ -379,8 +268,8 @@
           padding: 20px;
         }
 
-        .metrics-grid {
-          grid-template-columns: 1fr;
+        .footer {
+          padding: 20px;
         }
       }
     </style>
@@ -389,13 +278,17 @@
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <h1>🍔 요기요_롯데GRS 마케팅 통합 성과 리포트</h1>
+        <h1>🍔 요기요 롯데리아 할인 타겟 마케팅 분석 레포트</h1>
         <div class="header-info">
-          <p><strong>분석 기간:</strong> 2025년 캠페인 기준 (1·2차 통합)</p>
           <p>
-            <strong>타겟:</strong> 20-39세 남녀, 수도권(서울·경기 포함) |
-            <strong>총 발송:</strong> 82,470건 | <strong>총 클릭:</strong> 754건
-            | <strong>평균 CTR:</strong> 0.91%
+            <strong>분석 대상:</strong> 2025-10-20 진행된
+            '요기요_롯데GRS_1020_2차_RM4만_Y34|700' 캠페인
+          </p>
+          <p>
+            <strong>타겟:</strong> 20-39세, 수도권(서울/경기/인천) |
+            <strong>총 발송:</strong> 41,240건 | <strong>총 클릭:</strong> 404건
+            | <strong>평균 CTR:</strong> 0.98% |
+            <strong>평균 Lift:</strong> 0.65
           </p>
         </div>
       </div>
@@ -405,1010 +298,743 @@
         <div class="toc">
           <h2>📋 목차</h2>
           <ol>
-            <li><a href="#executive-summary">Executive Summary</a></li>
-            <li><a href="#summary">전체 캠페인 성과 요약</a></li>
-            <li><a href="#campaign_comp">캠페인별 성과 비교</a></li>
-            <li><a href="#residence">거주지 유형별 성과 분석</a></li>
-            <li><a href="#link_btn">시/도별 CTR 성과 분석</a></li>
-            <li><a href="#gender_age">성별-연령별 성과 분석</a></li>
-            <li><a href="#interest">연령별 스테이지 분석</a></li>
-            <li><a href="#food_app">푸드/앱 사용자 심층 분석</a></li>
-            <li><a href="#seg_detail">고객 세그먼트 세부분석</a></li>
-            <li><a href="#app_web">사용앱 카테고리별 성과 분석</a></li>
-            <li><a href="#strategy">핵심 전략 제언</a></li>
+            <li>
+              <a href="#section1">전체 캠페인 성과 요약 (Raw Data 기준)</a>
+            </li>
+            <li><a href="#section2">타겟 연령대(20-39세)별 성과 상세</a></li>
+            <li><a href="#section3">타겟 지역(수도권)별 성과 비교</a></li>
+            <li><a href="#section4">타겟 성별 성과 비교</a></li>
+            <li>
+              <a href="#section5">성별/연령대 교차 분석 (핵심 세그먼트 발굴)</a>
+            </li>
+            <li><a href="#section6">거주지 유형별 성과 분석</a></li>
+            <li>
+              <a href="#section7">Food 카테고리 앱 성과 분석 (고효율 타겟)</a>
+            </li>
+            <li>
+              <a href="#section8">주요 커뮤니케이션 채널 이용자 반응</a>
+            </li>
+            <li>
+              <a href="#section9">수도권 내 고효율 상세 지역 분석 (Top 3)</a>
+            </li>
+            <li>
+              <a href="#section10"
+                >종합 전략 및 결론: '30대 여성, 경기/인천 집중 공략'</a
+              >
+            </li>
           </ol>
         </div>
 
-        <div class="section" id="executive-summary">
-          <h2>📊 요약 (Executive Summary)</h2>
-          <div class="executive-summary">
-            <h2 style="font-size: 1.8em; margin-bottom: 25px; font-weight: 600">
-              📝 Executive Summary
-            </h2>
-            <div class="summary-grid">
-              <div class="summary-card">
-                <h3>💡 What (핵심 성과)</h3>
-                <p>
-                  '요기요_롯데GRS' 캠페인은 <strong>20-39세 남녀</strong> 및
-                  <strong>수도권(서울, 경기 포함)</strong>을 핵심 타겟으로 총
-                  82,470건의 메시지를 발송하여 754건의 클릭을 유도하였으며, 평균
-                  CTR 0.91%를 달성했습니다. 2차 캠페인이 1차 캠페인 대비 15%
-                  높은 CTR(0.98% vs 0.85%)을 기록하며 타겟팅 전략의 효과성을
-                  입증하였습니다.
-                </p>
-              </div>
-              <div class="summary-card">
-                <h3>🔍 Why (주요 원인 분석)</h3>
-                <p>
-                  <strong>20-39세 남녀 타겟</strong> 내에서 35-39세 여성
-                  세그먼트(CTR 2.37%)가 최고 성과를 기록하며 핵심 타겟으로
-                  확인되었으며,
-                  <strong>수도권(서울 0.75%, 경기 0.93%)</strong>에서도 안정적인
-                  성과를 보였습니다. 특히 30-34세 남성(CTR 2.14%), 35-39세
-                  남성(CTR 2.25%) 등 20-39세 전 연령대에서 평균 대비 높은
-                  반응률을 기록하여 타겟 설정의 적정성을 입증했습니다.
-                </p>
-              </div>
-              <div class="summary-card">
-                <h3>🚀 So What (전략적 시사점)</h3>
-                <p>
-                  <strong>20-39세 남녀</strong>를 Gold Target으로 설정한
-                  초세분화 타겟팅 전략을 지속 실행하고, 특히 30대 후반
-                  세그먼트에 예산을 집중해야 합니다.
-                  <strong>수도권(서울, 경기)</strong> 타겟에 대해서는 지역 특화
-                  메시징 및 배달 서비스 최적화를 통해 전환율을 높이고, 버거킹 앱
-                  사용자 대상 Cross-Targeting 캠페인을 통해 경쟁 우위를 확보해야
-                  합니다.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="section" id="summary">
-          <h2>1️⃣ 전체 캠페인 성과 요약</h2>
-
-          <div class="metrics-grid">
-            <div class="metric-card">
-              <div class="metric-label">총 발송 수</div>
-              <div class="metric-value">82,470</div>
-              <div class="metric-subtitle">건</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">총 클릭 수</div>
-              <div class="metric-value">754</div>
-              <div class="metric-subtitle">건</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">평균 CTR</div>
-              <div class="metric-value">0.91%</div>
-              <div class="metric-subtitle">성과 기준선</div>
-            </div>
-          </div>
-
-          <div class="insight-box">
-            <h4>💡 What (발견 사항)</h4>
-            <p>
-              본 캠페인은 총 82,470건의 메시지를 발송하여 754건의 클릭을
-              발생시켰으며, 평균 CTR 0.91%를 기록하였습니다. 이는 롯데GRS
-              브랜드의 할인 프로모션에 대한 사용자 반응을 나타내는 핵심
-              지표입니다.
-            </p>
-
-            <h4>🔍 Why (원인 분석)</h4>
-            <p>
-              캠페인 평균 CTR 0.91%는 전반적인 마케팅 효율성을 나타내며, 이
-              수치는 후속 세그먼트별 분석을 위한 성과 기준선(Benchmark)이
-              됩니다. 2차 캠페인이 1차 대비 높은 CTR을 기록한 것은 타겟팅 로직,
-              메시지 최적화, 발송 시점 등이 개선되었음을 시사합니다.
-            </p>
-
-            <h4>🚀 So What (전략적 시사점)</h4>
-            <p>
-              향후 캠페인에서는 0.91%를 Baseline으로 설정하고,
-              <strong>20-39세 남녀</strong> 및
-              <strong>수도권(서울, 경기)</strong> 타겟에 대한 예산 집중 및
-              맞춤형 메시징을 통해 CTR 상향을 도모해야 합니다. 특히 본 분석에서
-              확인된 고효율 타겟(20-39세 내 30대 후반, 수도권 내 경기 지역 등)에
-              대한 우선 투자를 권장합니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="section" id="campaign_comp">
-          <h2>2️⃣ 캠페인별 성과 비교</h2>
-
+        <div class="section-box" id="section1">
+          <h2>1. 전체 캠페인 성과 요약 (Raw Data 기준)</h2>
           <div class="chart-container">
-            <div id="campaign_chart"></div>
+            <canvas id="chart1"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              캠페인별 성과 비교 결과, 2차 캠페인이 CTR 0.98%를 기록하여 1차
-              캠페인(CTR 0.85%) 대비 1.15배 높은 성과를 달성하였습니다. 클릭
-              수도 404건으로 1차 캠페인(350건) 대비 15.4% 증가하여 양적, 질적
-              성과 모두에서 우위를 보였습니다.
-            </p>
-
-            <h4>🔍 Why (원인 분석)</h4>
-            <p>
-              2차 캠페인의 높은 성과는 다음과 같은 요인으로 분석됩니다: (1) 타겟
-              세그먼트 최적화(특히 30대 여성 집중), (2) 메시지 콘텐츠의 차별화
-              및 매력도 향상, (3) 발송 시점 최적화를 통한 고객 반응성 제고. 이는
-              캠페인 운영 노하우의 축적과 타겟팅 정교화가 성과에 직접적 영향을
-              미쳤음을 의미합니다.
-            </p>
-
-            <h4>🚀 So What (전략적 시사점)</h4>
-            <p>
-              고성과를 보인 2차 캠페인의 성공 요인(타겟팅 로직, 메시지 콘텐츠,
-              발송 시점 등)을 심층 분석하여 향후 모든 캠페인의 표준
-              모델(Standard Model)로 적용해야 합니다. 특히 2차 캠페인에서 활용된
-              타겟 세그먼트 및 메시징 전략을 다른 캠페인에도 확대 적용하여 전체
-              캠페인 효율성을 제고하는 것을 권장합니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="section" id="residence">
-          <h2>3️⃣ 거주지 유형별 성과 분석</h2>
-
-          <div class="chart-container">
-            <div id="residence_chart"></div>
-          </div>
-
-          <div class="insight-box">
-            <h4>💡 What (발견 사항)</h4>
-            <p>
-              거주지 유형별 세그먼트 분석 결과, '기타' 유형 거주자 그룹이 CTR
-              1.20%를 기록하여 평균 CTR(0.89%) 대비 1.35배 높은 반응률을
-              보였습니다. 반면, '오피스텔' 유형은 CTR 0.44%로 평균 대비 0.49배
-              수준의 낮은 성과를 기록하여 세그먼트 간 성과 차이가 뚜렷하게
+              2차 캠페인이 1차 캠페인 대비 발송량이 유사함에도 불구하고
+              <strong
+                >클릭 수(404 vs 350)와 CTR (0.98% vs 0.85%)이 더 높게</strong
+              >
               나타났습니다.
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              '기타' 그룹의 높은 CTR은 다음과 같은 요인으로 분석됩니다: (1) 해당
-              분류에 포함된 소규모 주거 형태(원룸, 고시원, 상업시설 인근 주거
-              등)의 거주자가 롯데리아 배달/외식 서비스에 대한 수요가 높음, (2)
-              주거 환경 특성상 조리 시설이 제한적이어서 간편식 및 배달 서비스
-              의존도가 높음. 오피스텔 거주자의 낮은 CTR은 직장인 비율이 높아
-              주거지에서의 식사 빈도가 낮거나, 다른 식사 옵션을 선호하는
-              경향으로 해석됩니다.
+              2차 캠페인에 적용된
+              <strong>메시지, 혜택, 타겟팅 세그먼트</strong> 등의 요소가 더
+              효과적이었을 가능성이 높습니다. 전반적인 캠페인의 효과 지표(CTR,
+              Lift)는 평균 수준으로, 세부 타겟 분석을 통해 더 높은 효율을 보이는
+              세그먼트를 발굴할 필요가 있습니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              '기타' 그룹에 대한 추가적인 지리적/인구통계학적 특성 분석을 통해
-              이들의 잠재된 고관여 요인을 파악하고, 유사 특성을 가진 세그먼트를
-              발굴하여 타겟팅을 확장해야 합니다. 오피스텔 그룹에 대해서는 타겟팅
-              제외(Exclude) 또는 직장 근처 배달 서비스, 점심 시간대 프로모션 등
-              차별화된 메시지 전략을 고려해야 합니다.
+              2차 캠페인의 성공 요소를 분석하여 향후 마케팅에 적용해야 합니다.
+              세부 타겟 분석을 통해 이 성과를 견인한 핵심 세그먼트를 발굴하고,
+              향후 마케팅 예산을 효율적으로 집중할 방안을 모색해야 합니다.
             </p>
           </div>
+          <script>
+            // Data from 캠페인_롯데리아.csv (2차 캠페인)
+            const campData = {
+              sent: 41240,
+              click: 404,
+              ctr: 0.979631425800194,
+              lift: 0.65,
+            };
+            new Chart(document.getElementById("chart1"), {
+              type: "bar",
+              data: {
+                labels: ["CTR (%)", "Lift"],
+                datasets: [
+                  {
+                    label: "캠페인 성과 지표",
+                    data: [campData.ctr, campData.lift],
+                    backgroundColor: [
+                      "rgba(102, 126, 234, 0.8)",
+                      "rgba(245, 87, 108, 0.8)",
+                    ],
+                    borderColor: [
+                      "rgba(102, 126, 234, 1)",
+                      "rgba(245, 87, 108, 1)",
+                    ],
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "캠페인 핵심 성과 지표 (2차 캠페인)",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: { y: { beginAtZero: true } },
+              },
+            });
+          </script>
         </div>
 
-        <div class="section" id="link_btn">
-          <h2>4️⃣ 시/도별 CTR 성과 분석</h2>
-
+        <div class="section-box" id="section2">
+          <h2>2. 타겟 연령대(20-39세)별 성과 상세 🧑</h2>
           <div class="chart-container">
-            <div id="sido_chart"></div>
+            <canvas id="chart2"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              시/도별 CTR 분석 결과, <strong>수도권 타겟</strong>인
-              <strong>경기(0.93%)</strong>가 전체 평균(0.94%)과 유사한 수준의
-              안정적인 성과를 보였으며, <strong>서울(0.75%)</strong>도 타겟팅
-              볼륨 대비 양호한 성과를 기록했습니다. 수도권 외 지역 중
-              세종(1.97%), 대구(1.26%), 경남(1.14%) 등이 높은 성과를 보였으며,
-              반면 제주 지역은 0.33%로 최저 성과를 보여 지역 간 성과 격차가 크게
-              나타났습니다.
+              CTR은 <strong>35-39세(1.11%)</strong>가 가장 높고, 30-34세(0.81%),
+              20-24세(0.52%), 25-29세(0.49%) 순으로 나타났습니다.
+              <strong>30대 후반(35-39세)의 CTR과 Lift가 가장 높습니다.</strong>
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              <strong>수도권(서울, 경기)</strong>의 안정적인 CTR은 다음과 같은
-              요인으로 분석됩니다: (1) 20-39세 남녀 타겟의 높은 집중도로 인한
-              디지털 서비스 이용 빈도가 높음, (2) 배달 인프라가 발달하여 배달
-              서비스 이용이 활발함, (3) 경쟁 브랜드가 많아 할인 프로모션에 대한
-              반응성이 높음. 경기가 서울보다 약간 높은 CTR을 보인 것은 신도시
-              지역의 젊은 가구 비율이 높고, 배달 서비스 의존도가 더 높기
-              때문으로 해석됩니다.
+              20대 초반(20-24세)의 CTR(0.52%)과 Lift(0.53)가 상대적으로 낮고,
+              30대 후반(35-39세)이 롯데리아 딜에 가장 잘 반응하는 핵심
+              연령층임을 시사합니다. 이는 30대 후반이 주도적인 소비력을
+              갖추면서도 가성비를 추구하는 경향과 관련이 있을 수 있습니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              <strong>수도권(서울, 경기)</strong> 타겟에 대해서는 지역 특화 배달
-              프로모션 및 시간대별(점심/저녁/야식) 맞춤형 메시징을 강화하여
-              전환율을 높여야 합니다. 특히 경기 지역의 높은 잠재력을 활용하여
-              신도시 중심의 집중 타겟팅을 실행하고, 서울 지역에 대해서는 경쟁
-              브랜드 대비 차별화된 혜택을 강조하는 메시지를 적용해야 합니다.
-              수도권 외 고성과 지역(세종, 대구 등)에 대해서도 유사한 전략을 확대
-              적용하는 것을 권장합니다.
+              20대 초반 타겟에는 <strong>메시지/채널을 차별화</strong>하여
+              노출을 늘리고, <strong>30대 후반</strong> 타겟에는
+              <strong>가장 공격적인 마케팅(예: 최대 혜택)을 집중</strong>하여
+              전환율을 극대화해야 합니다.
             </p>
           </div>
+          <script>
+            // Data from 연령별_롯데리아.csv (2차 캠페인, 20-39세)
+            const ageData = [
+              { age: "20-24", ctr: 0.52, lift: 0.53, sent: 10749 },
+              { age: "25-29", ctr: 0.49, lift: 0.5, sent: 7893 },
+              { age: "30-34", ctr: 0.81, lift: 0.83, sent: 4573 },
+              { age: "35-39", ctr: 1.11, lift: 1.13, sent: 4223 },
+            ];
+            new Chart(document.getElementById("chart2"), {
+              type: "bar",
+              data: {
+                labels: ageData.map((d) => d.age),
+                datasets: [
+                  {
+                    label: "CTR (%)",
+                    data: ageData.map((d) => d.ctr),
+                    backgroundColor: "rgba(102, 126, 234, 0.8)",
+                    borderColor: "rgba(102, 126, 234, 1)",
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "타겟 연령대별 CTR 성과 (2차 캠페인)",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "CTR (%)" },
+                  },
+                },
+              },
+            });
+          </script>
         </div>
 
-        <div class="section" id="gender_age">
-          <h2>5️⃣ 성별-연령별 성과 분석</h2>
-
+        <div class="section-box" id="section3">
+          <h2>3. 타겟 지역(수도권)별 성과 비교 🏙️</h2>
           <div class="chart-container">
-            <div id="gender_age_chart"></div>
+            <canvas id="chart3"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              <strong>20-39세 남녀 타겟</strong> 내 성별-연령별 세그먼트 분석
-              결과, 여성 35-39세 세그먼트가 CTR 2.37%로 가장 높은 반응률을
-              보였으며, 이는 캠페인 평균(0.91%) 대비 2.6배 높은 수치입니다.
-              <strong>20-39세 타겟</strong> 내에서 고성과 세그먼트는 30대~40대
-              초반에 집중되는 경향을 보였으며, 남성 35-39세(CTR 2.25%), 남성
-              30-34세(CTR 2.14%), 여성 30-34세(CTR 1.82%) 등이 모두 평균 대비
-              높은 효율을 기록하여 타겟 설정의 적정성을 입증했습니다.
+              발송량이 가장 많은 <strong>경기(9,428)</strong>가 서울(8,503)보다
+              높은 CTR(0.93%)을 보였으며,
+              <strong>인천(1.03%)이 수도권 중 가장 높은 CTR</strong>을
+              기록했습니다.
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              <strong>20-39세 타겟</strong> 내에서 30~40대 여성의 높은 CTR은
-              다음과 같은 요인으로 분석됩니다: (1) 가정 내 외식/배달 결정권을
-              가지는 경우가 많아 즉각적인 구매 결정 가능, (2) 해당 연령대의 가족
-              구성원(어린 자녀 등)을 위한 메뉴 구매 니즈가 높음, (3) 롯데리아의
-              패밀리 세트 또는 간편식 프로모션에 적극적으로 반응하는 소비 패턴.
-              20-39세 남성도 직장인 비율이 높아 간편식 및 배달 서비스 이용
-              빈도가 높으며, 특히 30대 후반 남성은 가족 단위 소비 결정에
-              참여하는 경우가 많아 높은 반응률을 보입니다.
+              <strong>인천 지역</strong>은 적은 발송량으로도 높은 반응률을
+              보였으므로, 추가 예산 투입 시 고효율을 기대할 수 있습니다. 서울
+              지역은 CTR이 상대적으로 낮으므로, 지역별 맞춤형 혜택 또는 메시지
+              최적화가 필요합니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              <strong>20-39세 남녀 타겟</strong> 중 특히 30대 후반(35-39세)
-              세그먼트에 초점을 맞춘 가족 단위 프로모션(패밀리 세트 할인, 자녀
-              선호 메뉴 강조) 및 주요 구매 시간대(저녁, 주말 점심)에 메시지
-              발송을 집중하여 캠페인 효율을 극대화해야 합니다. 특히 35-39세 여성
-              세그먼트에 전체 예산의 30% 이상을 재배치하고, 20-39세 전체 타겟에
-              대해서는 연령대별 맞춤형 메시징을 적용하는 것을 권장합니다.
+              <strong>인천 지역</strong>은 적은 발송량으로도 높은 반응률을
+              보였으므로, <strong>추가 예산 투입 시 고효율</strong>을 기대할 수
+              있습니다. <strong>서울 지역</strong>은 CTR이 상대적으로 낮으므로,
+              <strong>지역별 맞춤형 혜택</strong> 또는 메시지 최적화가
+              필요합니다.
             </p>
           </div>
+          <script>
+            // Data from 시도_롯데리아.csv (2차 캠페인, 수도권)
+            const sidoData = [
+              { sido: "인천", ctr: 1.03, lift: 1.05 },
+              { sido: "경기", ctr: 0.93, lift: 0.95 },
+              { sido: "서울", ctr: 0.81, lift: 0.83 },
+            ];
+            new Chart(document.getElementById("chart3"), {
+              type: "bar",
+              data: {
+                labels: sidoData.map((d) => d.sido),
+                datasets: [
+                  {
+                    label: "CTR (%)",
+                    data: sidoData.map((d) => d.ctr),
+                    backgroundColor: "rgba(102, 126, 234, 0.8)",
+                    borderColor: "rgba(102, 126, 234, 1)",
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "수도권 시도별 CTR 성과 (2차 캠페인)",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "CTR (%)" },
+                  },
+                },
+              },
+            });
+          </script>
         </div>
 
-        <div class="section" id="interest">
-          <h2>6️⃣ 연령별 스테이지 분석</h2>
-
+        <div class="section-box" id="section4">
+          <h2>4. 타겟 성별 성과 비교 🚻</h2>
           <div class="chart-container">
-            <div id="stage_chart"></div>
+            <canvas id="chart4"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              연령별 스테이지 분석 결과, '유치원생부모' 그룹이 CTR 1.77%로 가장
-              높은 반응을 보였으며, 이는 캠페인 평균(0.91%) 대비 1.95배 높은
-              수치입니다. '고등학생부모'(1.53%), '유아부모'(1.44%) 순으로 높은
-              효율을 보였으며, 반면 '고등학생' 그룹은 CTR 0.47%로 최저 성과를
-              기록하여 부모 세그먼트와 직접 타겟 간 성과 차이가 뚜렷하게
-              나타났습니다.
+              <strong>여성(1.09%)이 남성(0.83%)보다 월등히 높은 CTR</strong>을
+              기록했습니다. 이는 롯데리아 마케팅 메시지나 제품이 여성 타겟에게
+              더 매력적으로 다가갔거나, 여성의 앱 활용도가 더 높기 때문일 수
+              있습니다.
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              유아/유치원생 부모의 높은 CTR은 다음과 같은 요인으로 분석됩니다:
-              (1) 육아로 인한 시간 부족으로 간편한 외식 옵션을 선호, (2) 자녀를
-              위한 식사 구매 니즈가 높아 패밀리 세트 및 어린이 메뉴에 대한
-              관심도가 높음, (3) 가족 단위 소비 결정권을 가진 경우가 많아
-              즉각적인 반응 가능. 고등학생 세그먼트의 낮은 CTR은 직접적인
-              타겟팅보다는 부모를 통한 간접 접근이 효과적이거나, 다른
-              채널(소셜미디어 등)에 더 집중되어 있을 가능성이 있습니다.
+              롯데리아 마케팅 메시지나 제품이 여성 타겟에게 더 매력적으로
+              다가갔거나, 여성의 앱 활용도가 더 높기 때문일 수 있습니다. 남성
+              타겟의 반응률이 상대적으로 낮은 것은 메시지나 혜택이 남성의
+              관심사와 맞지 않았을 가능성이 있습니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              '유아/유치원생 부모' 세그먼트를 가장 핵심적인 타겟으로 정의하고,
-              이들을 위한 어린이 메뉴 프로모션, 부모 할인 혜택, 패밀리 세트 특가
-              등을 개발해야 합니다. 고등학생 세그먼트에 대해서는 타겟팅 제외
-              또는 부모를 통한 간접 접근 전략을 고려하고, 예산을 고효율
-              세그먼트로 재배치하는 것을 권장합니다.
+              <strong>여성</strong> 타겟에 집중하는 캠페인은
+              <strong>효율 극대화</strong>에 유리하며,
+              <strong>남성</strong> 타겟의 반응률을 높이기 위해서는
+              <strong>남성 선호 메뉴(예: 고기류 버거, 단품)와 혜택</strong>을
+              강조하는 별도 세그먼트를 운영할 필요가 있습니다.
             </p>
           </div>
+          <script>
+            // Data from 성별_롯데리아.csv (2차 캠페인)
+            const sexData = [
+              { sex: "여성(2)", ctr: 1.09, lift: 0.72 },
+              { sex: "남성(1)", ctr: 0.83, lift: 0.55 },
+            ];
+            new Chart(document.getElementById("chart4"), {
+              type: "bar",
+              data: {
+                labels: sexData.map((d) => d.sex),
+                datasets: [
+                  {
+                    label: "CTR (%)",
+                    data: sexData.map((d) => d.ctr),
+                    backgroundColor: [
+                      "rgba(245, 87, 108, 0.8)",
+                      "rgba(102, 126, 234, 0.8)",
+                    ],
+                    borderColor: [
+                      "rgba(245, 87, 108, 1)",
+                      "rgba(102, 126, 234, 1)",
+                    ],
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "성별 CTR 성과 비교 (2차 캠페인)",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "CTR (%)" },
+                  },
+                },
+              },
+            });
+          </script>
         </div>
 
-        <div class="section" id="food_app">
-          <h2>7️⃣ 푸드/앱 사용자 심층 분석</h2>
-
+        <div class="section-box" id="section5">
+          <h2>5. 성별/연령대 교차 분석 (핵심 세그먼트 발굴) 🎯</h2>
           <div class="chart-container">
-            <div id="food_app_chart"></div>
+            <canvas id="chart5"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              푸드 카테고리 내 앱 사용자 분석 결과, 롯데리아 자사 앱 사용자(CTR
-              1.26%)가 가장 높은 CTR을 보였으며, 경쟁사 중에서는 버거킹
-              사용자(CTR 1.05%)가 높은 잠재력을 보였습니다. 맥도날드(0.89%),
-              배달의민족(0.93%) 사용자는 평균 수준의 반응을 보였으며, 자사 앱
-              사용자의 높은 CTR은 브랜드 충성도와 직접 연관되어 있음을
-              시사합니다.
+              <strong
+                >여성 35-39세(2.06%)와 남성 30-34세(1.97%)의 CTR이 가장 높게
+                나타나</strong
+              >, 30대 타겟의 높은 반응성을 성별 교차 분석에서도 확인할 수
+              있습니다. 20대의 반응률(20-24세 남성 0.62%, 여성 0.77%)은 30대
+              대비 현저히 낮습니다.
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              롯데리아 자사 앱 사용자의 높은 CTR은 브랜드 충성도와 앱 푸시
-              알림에 대한 관심도가 높기 때문으로 분석됩니다. 경쟁사 앱 사용자,
-              특히 버거킹 사용자의 높은 반응률은 다음과 같은 요인으로
-              해석됩니다: (1) 할인/쿠폰 민감도가 높은 버거 카테고리 충성 고객,
-              (2) 다중 플랫폼 이용 경험을 통한 혜택 비교 습관, (3) 플랫폼 전환
-              의향이 있어 경쟁사 오퍼에 대한 반응성이 높음. 이들은 High-Value
-              Cross-Targeting 세그먼트로 분류됩니다.
+              30대는 성별에 관계없이 <strong>핵심 전환군</strong>으로 설정할 수
+              있으며, 특히 여성 35-39세는 가정 내 식사 결정에 큰 영향을
+              미치므로, 롯데리아 할인과 같은 실용적인 혜택에 민감하게 반응할
+              가능성이 높습니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              '버거킹 사용자'를 대상으로 경쟁사 대비 차별화된 파격적인 쿠폰을
-              제공하는 Cross-Targeting 캠페인을 즉시 실행하여 경쟁 우위를
-              확보해야 합니다. 특히 버거킹 사용자에게 "타 브랜드 대비 최대
-              할인율", "롯데리아 단독 특가" 등을 강조하는 메시징을 적용하여
-              플랫폼 전환을 유도하고, 자사 앱 사용자에 대해서는 재구매 유도 및
-              LTV 확보 전략을 수립해야 합니다.
+              <strong>30대</strong>는 성별에 관계없이
+              <strong>핵심 전환군</strong>으로 설정하고,
+              <strong>20대</strong> 타겟에는
+              <strong>상품(예: 20대가 선호하는 메뉴)</strong>과
+              <strong>캠페인 톤앤매너</strong>를 전면 재검토해야 합니다.
             </p>
           </div>
+          <script>
+            // Data from 성별_연령별.csv (20-39세만 필터링)
+            const sexAgeData = [
+              { segment: "남성 20-24", ctr: 0.62, lift: 0.41 },
+              { segment: "여성 20-24", ctr: 0.77, lift: 0.51 },
+              { segment: "남성 25-29", ctr: 1.39, lift: 0.92 },
+              { segment: "여성 25-29", ctr: 0.83, lift: 0.56 },
+              { segment: "남성 30-34", ctr: 1.92, lift: 1.28 },
+              { segment: "여성 30-34", ctr: 1.82, lift: 1.21 },
+              { segment: "남성 35-39", ctr: 1.75, lift: 1.17 },
+              { segment: "여성 35-39", ctr: 2.06, lift: 1.37 },
+            ];
+            new Chart(document.getElementById("chart5"), {
+              type: "bar",
+              data: {
+                labels: sexAgeData.map((d) => d.segment),
+                datasets: [
+                  {
+                    label: "CTR (%)",
+                    data: sexAgeData.map((d) => d.ctr),
+                    backgroundColor: sexAgeData.map((d, i) =>
+                      i % 2 === 0
+                        ? "rgba(102, 126, 234, 0.8)"
+                        : "rgba(245, 87, 108, 0.8)"
+                    ),
+                    borderColor: sexAgeData.map((d, i) =>
+                      i % 2 === 0
+                        ? "rgba(102, 126, 234, 1)"
+                        : "rgba(245, 87, 108, 1)"
+                    ),
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "성별/연령대 교차 분석 CTR",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "CTR (%)" },
+                  },
+                  x: {
+                    ticks: {
+                      maxRotation: 45,
+                      minRotation: 45,
+                    },
+                  },
+                },
+              },
+            });
+          </script>
         </div>
 
-        <div class="section" id="seg_detail">
-          <h2>8️⃣ 고객 세그먼트 세부분석</h2>
-
+        <div class="section-box" id="section6">
+          <h2>6. 거주지 유형별 성과 분석 🏠</h2>
           <div class="chart-container">
-            <div id="segment_chart"></div>
+            <canvas id="chart6"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              <strong>20-39세 남녀 타겟</strong> 내 고객 세그먼트 세부분석 결과,
-              여성 35-39세(CTR 2.37%)가 클릭 수와 CTR 모두에서 가장 높은 효율을
-              보였으며, 이는 캠페인 평균 대비 2.6배 높은 수치입니다. 그 뒤를
-              남성 35-39세(CTR 2.25%), 남성 30-34세(CTR 2.14%) 등이 이었으며,
-              Top 5에 <strong>20-39세 타겟</strong> 내 30대 세그먼트가 다수
-              포함되어 30대 전반의 반응성이 매우 높음을 확인했습니다.
+              '기타' 거주지 유형의 CTR(1.20%)이 가장 높게 나타났습니다. 이는
+              아파트(0.94%) 대비 높은 수치로, '기타' 지역의 타겟이 쿠폰 혜택에
+              더 민감하게 반응하거나 주변에 롯데리아 접근성이 상대적으로 낮아
+              딜에 대한 가치를 높게 평가했을 수 있습니다.
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              <strong>20-39세 타겟</strong> 내에서 30대 전반의 높은 CTR은 다음과
-              같은 요인으로 분석됩니다: (1) 사회생활과 가정을 꾸리는 시기로
-              외식/배달 서비스 의존도가 높은 핵심 소비층, (2) 가정 내 식사
-              결정권을 가진 경우가 많아 즉각적인 구매 결정 가능, (3) 직장인
-              비율이 높아 간편식 및 배달 서비스 이용 빈도가 높음. 특히 35-39세
-              세그먼트는 가족 구성원이 있는 경우가 많아 패밀리 세트 등에 대한
-              관심도가 높을 것으로 추정됩니다.
+              '기타' 거주지 유형은 아파트에 비해
+              <strong>1인 가구 또는 소규모 가구</strong>의 비중이 높을 가능성이
+              있으며, 배달 음식 수요가 높고 할인 혜택에 민감하게 반응할 수
+              있습니다. 주택/빌라/원룸도 아파트보다 높은 CTR을 보였습니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              <strong>20-39세 타겟</strong> 내에서 30대 전반(남성/여성 모두)을
-              Gold Target으로 재정의하고, 이들에게 최적화된
-              시간대별(점심/저녁/야식) 맞춤형 메뉴 추천 및 혜택 메시지를
-              자동화하여 캠페인 효율의 상한선을 높여야 합니다. 특히 35-39세 여성
-              세그먼트에 전체 예산의 30% 이상을 재배치하고,
-              <strong>20-39세 전체 타겟</strong>에 대해서는 연령대별
-              라이프스타일에 맞춘 상황별 메시징을 적용하는 것을 권장합니다.
+              <strong>'기타' 및 '주택/빌라/원룸'</strong> 거주 지역을 중심으로
+              <strong>배달 가능 여부 및 배달료 혜택</strong>을 강조하는 마케팅을
+              통해 CTR을 더욱 높일 수 있습니다.
             </p>
           </div>
+          <script>
+            // Data from 거주지_롯데리아.csv (2차 캠페인)
+            const bldCatData = [
+              { cat: "기타", ctr: 1.2, lift: 0.8 },
+              { cat: "주택빌라원룸", ctr: 0.99, lift: 0.66 },
+              { cat: "아파트", ctr: 0.94, lift: 0.63 },
+            ];
+            new Chart(document.getElementById("chart6"), {
+              type: "bar",
+              data: {
+                labels: bldCatData.map((d) => d.cat),
+                datasets: [
+                  {
+                    label: "CTR (%)",
+                    data: bldCatData.map((d) => d.ctr),
+                    backgroundColor: "rgba(102, 126, 234, 0.8)",
+                    borderColor: "rgba(102, 126, 234, 1)",
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "거주지 유형별 CTR 성과 (2차 캠페인)",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "CTR (%)" },
+                  },
+                },
+              },
+            });
+          </script>
         </div>
 
-        <div class="section" id="app_web">
-          <h2>9️⃣ 사용앱 카테고리별 성과 분석</h2>
-
+        <div class="section-box" id="section7">
+          <h2>7. Food 카테고리 앱 성과 분석 (고효율 타겟) 🍗</h2>
           <div class="chart-container">
-            <div id="app_cat_chart"></div>
+            <canvas id="chart7"></canvas>
           </div>
-
           <div class="insight-box">
             <h4>💡 What (발견 사항)</h4>
             <p>
-              사용앱 카테고리별 성과 분석 결과, 'RealEstates' 카테고리가 CTR
-              3.85%로 최고 성과를 기록하였으며, 이는 캠페인 평균(0.91%) 대비
-              4.23배 높은 수치입니다. 'LifeStyle' 카테고리(1.63%)가 그 뒤를
-              이었으며, 이는 평균 대비 1.79배 높은 효율을 보였습니다. 반면
-              'Finance'(0.89%), 'Portal'(0.94%) 등은 평균 수준의 반응을
-              보였습니다.
+              <strong>버거킹 이용자의 CTR(1.05%)이 가장 높습니다.</strong> 이는
+              버거킹 이용자가 햄버거 딜에 대한 관심도가 높고, 경쟁사 브랜드에
+              대한 교차 소비 성향이 강함을 시사합니다.
             </p>
 
             <h4>🔍 Why (원인 분석)</h4>
             <p>
-              RealEstates 및 LifeStyle 앱 사용자의 높은 CTR은 다음과 같은
-              요인으로 분석됩니다: (1) 구매력이 높은 특정 연령/소득대일 가능성이
-              높아 프리미엄 서비스에 대한 관심도가 높음, (2) 라이프스타일 앱
-              사용자는 생활의 질 향상에 관심이 많아 고품질 외식 서비스에
-              반응성이 높음, (3) 롯데리아의 '프리미엄' 버거 또는 고가 메뉴에 더
-              잘 반응할 수 있는 소비 패턴. 이들은 High-Value Customer 잠재
-              세그먼트로 분류됩니다.
+              버거킹 이용자는 햄버거 딜에 대한 관심도가 높고, 경쟁사 브랜드에
+              대한 교차 소비 성향이 강함을 시사합니다. 배달의민족 이용자는 평균
+              수준의 CTR을 보였습니다.
             </p>
 
             <h4>🚀 So What (전략적 시사점)</h4>
             <p>
-              '고관여 라이프스타일 앱 사용자'를 포착하여 고단가 제품/세트 메뉴에
-              대한 프로모션을 전개하고, 잠재적 고가치 고객(High-Value
-              Customer)으로 전환시키는 전략을 수립해야 합니다. 특히 RealEstates
-              앱 사용자에게는 프리미엄 메뉴 및 딜리버리 서비스의 편리성을
-              강조하는 메시징을 적용하여 구매 단가(AOV)를 높이는 데 집중해야
+              <strong>버거킹 이용자</strong>를 대상으로
+              <strong>경쟁사 대비 차별화된 혜택(예: 세트 메뉴 할인)</strong>을
+              제공하여 <strong>Lock-in</strong>을 시도하고,
+              <strong>배달의민족 이용자</strong>에게는
+              <strong>할인 쿠폰</strong>을 통한 즉각적인 주문 유도를 강화해야
+              합니다.
+            </p>
+          </div>
+          <script>
+            // Data from 음식_롯데리아.csv (2차 캠페인, Top 3)
+            const foodAppData = [
+              { app: "버거킹", ctr: 1.05 },
+              { app: "배달의민족", ctr: 0.93 },
+              { app: "맥도날드", ctr: 0.89 },
+            ];
+            new Chart(document.getElementById("chart7"), {
+              type: "bar",
+              data: {
+                labels: foodAppData.map((d) => d.app),
+                datasets: [
+                  {
+                    label: "CTR (%)",
+                    data: foodAppData.map((d) => d.ctr),
+                    backgroundColor: "rgba(102, 126, 234, 0.8)",
+                    borderColor: "rgba(102, 126, 234, 1)",
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "Food 카테고리 앱 CTR Top 3 (2차 캠페인)",
+                    font: { size: 16, weight: "bold" },
+                  },
+                  legend: { display: false },
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "CTR (%)" },
+                  },
+                },
+              },
+            });
+          </script>
+        </div>
+
+        <div class="section-box" id="section8">
+          <h2>8. 주요 커뮤니케이션 채널 이용자 반응 📱</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>앱 이름</th>
+                <th>발송(sent)</th>
+                <th>CTR (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>다음(Daum)</td>
+                <td>34,688</td>
+                <td>0.95%</td>
+              </tr>
+              <tr>
+                <td>카카오톡</td>
+                <td>34,727</td>
+                <td>0.94%</td>
+              </tr>
+              <tr>
+                <td>네이버(Naver)</td>
+                <td>34,722</td>
+                <td>0.94%</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <h4>💡 What (발견 사항)</h4>
+            <p>
+              포털/메신저 앱 이용자들은 대규모 발송량에도 불구하고
+              <strong>평균 CTR (약 0.94%~0.95%)</strong>을 보이며, 특정 앱
+              이용자가 압도적으로 높은 반응을 보이진 않았습니다.
+            </p>
+
+            <h4>🔍 Why (원인 분석)</h4>
+            <p>
+              해당 앱 이용자들을 대상으로 하는
+              <strong>광고 소재와 랜딩 페이지</strong>가 보편적인 반응률을
+              보이고 있으므로, 앱 이용 맥락을 고려한 개인화된 크리에이티브가
+              필요합니다.
+            </p>
+
+            <h4>🚀 So What (전략적 시사점)</h4>
+            <p>
+              해당 앱 이용자들을 대상으로 하는
+              <strong>광고 소재와 랜딩 페이지</strong>가 보편적인 반응률을
+              보이고 있으므로, <strong>앱 이용 맥락</strong>을 고려한
+              <strong>개인화된 크리에이티브</strong>를 통해 CTR 개선을 시도해야
               합니다.
             </p>
           </div>
         </div>
 
-        <div class="section" id="strategy">
-          <h2>🚀 핵심 전략 제언</h2>
+        <div class="section-box" id="section9">
+          <h2>9. 수도권 내 고효율 상세 지역 분석 (Top 3) 📍</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>시도</th>
+                <th>시군구</th>
+                <th>발송(sent)</th>
+                <th>CTR (%)</th>
+                <th>Lift</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>경기</td>
+                <td>부천시 원미구</td>
+                <td>102</td>
+                <td>1.96%</td>
+                <td>1.31</td>
+              </tr>
+              <tr>
+                <td>경기</td>
+                <td>성남시 분당구</td>
+                <td>209</td>
+                <td>1.91%</td>
+                <td>1.27</td>
+              </tr>
+              <tr>
+                <td>경기</td>
+                <td>안양시 만안구</td>
+                <td>103</td>
+                <td>1.94%</td>
+                <td>1.29</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <h4>💡 What (발견 사항)</h4>
+            <p>
+              경기도 내
+              <strong>부천시 원미구, 성남시 분당구, 안양시 만안구</strong> 등
+              일부 시/군/구에서 전체 평균(0.98%) 대비
+              <strong>2배 가까운 CTR</strong>을 기록했습니다.
+            </p>
 
-          <div class="strategy-box">
-            <h3>1. 20-39세 남녀 & 수도권 타겟팅 초세분화 전략</h3>
-            <ul>
-              <li>
-                <strong>근거:</strong> <strong>20-39세 남녀 타겟</strong> 내에서
-                35-39세 여성(CTR 2.37%), 남성(CTR 2.25%), 30-34세 남성(CTR
-                2.14%) 등이 모두 평균 대비 2배 이상 높은 효율을 보였으며,
-                <strong>수도권(서울 0.75%, 경기 0.93%)</strong> 타겟에서도
-                안정적인 성과를 기록했습니다. 이들은 캠페인 평균 대비 1.2배 ~
-                2.6배 높은 효율을 보이며 핵심 타겟으로 분류됩니다.
-              </li>
-              <li>
-                <strong>실행 방안:</strong> <strong>20-39세 남녀</strong> 중
-                특히 30대 후반(35-39세) 세그먼트를 핵심 'Gold Target'으로
-                설정하고, <strong>수도권(서울, 경기)</strong> 지역에 집중하여
-                패밀리 세트, 어린이 메뉴 관련 할인 등 맞춤형 혜택을 제공합니다.
-                전체 예산의 60% 이상을
-                <strong>20-39세 남녀 + 수도권</strong> 교집합 세그먼트에
-                재배치하여 캠페인 효율성을 극대화합니다.
-              </li>
-            </ul>
-          </div>
+            <h4>🔍 Why (원인 분석)</h4>
+            <p>
+              이는 해당 지역의 타겟 밀도, 접근성, 또는 거주민 특성이 영향을
+              미쳤을 수 있습니다. 경기 지역 내에서도 특정 구군이 높은 효율을
+              보이는 것으로 나타났습니다.
+            </p>
 
-          <div class="strategy-box">
-            <h3>2. 경쟁사 사용자 교차 타겟팅 강화 전략</h3>
-            <ul>
-              <li>
-                <strong>근거:</strong> 버거킹 앱 사용자(CTR 1.05%)가 경쟁사 중
-                가장 높은 잠재력을 보였으며, 이는 자사 앱 사용자(1.26%)에
-                버금가는 수준입니다. 이들은 할인/쿠폰 민감도가 높은 버거
-                카테고리 충성 고객으로 분류됩니다.
-              </li>
-              <li>
-                <strong>실행 방안:</strong> 버거킹 앱 사용자에게 경쟁사 대비 더
-                파격적인 혜택을 제공하는 Cross-Targeting 특화 캠페인을 즉시
-                실행합니다. 해당 고객들이 버거 카테고리에 대한 충성도는 높으나
-                혜택 민감도가 높다는 점을 활용, 경쟁사 대비 낮은 가격/높은
-                가치를 강조하는 메시징(예: "버거킹 대비 최대 할인율", "롯데리아
-                단독 특가")을 적용하여 브랜드 스위칭을 유도합니다.
-              </li>
-            </ul>
-          </div>
-
-          <div class="strategy-box">
-            <h3>3. 수도권 지역 특화 메시지 최적화 전략</h3>
-            <ul>
-              <li>
-                <strong>근거:</strong>
-                <strong>수도권(서울, 경기)</strong> 타겟에서 경기(CTR 0.93%)가
-                서울(0.75%)보다 높은 성과를 보였으며, 특히 경기 지역의 신도시
-                특성상 20-39세 젊은 가구 비율이 높아 배달 서비스 의존도가
-                높습니다. RealEstates 앱 사용자(CTR 3.85%)가 평균 대비 4.23배
-                높은 성과를 기록하여 고가치 고객 잠재 세그먼트로 확인되었습니다.
-              </li>
-              <li>
-                <strong>실행 방안:</strong> <strong>수도권(서울, 경기)</strong>
-                타겟에게는 지역 특화 배달 프로모션 및 시간대별(점심/저녁/야식)
-                맞춤형 메시징을 제공합니다. 특히 경기 신도시 지역의 20-39세
-                가구에게는 패밀리 세트 할인을, 서울 지역에는 경쟁 브랜드 대비
-                차별화된 혜택을 강조하는 메시지를 발송합니다. RealEstates 및
-                LifeStyle 앱 사용자에게는 고단가 프리미엄 버거 라인업과 딜리버리
-                서비스의 편리성을 강조하여 구매 단가(AOV)를 높입니다.
-              </li>
-            </ul>
+            <h4>🚀 So What (전략적 시사점)</h4>
+            <p>
+              이 <strong>Top 3 지역</strong>을
+              <strong>초우수 타겟 지역</strong>으로 지정하여
+              <strong>발송량 증대 및 혜택 집중(예: 무료 배달)</strong>을 통해
+              매출 기여도를 극대화해야 합니다.
+            </p>
           </div>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-          <p><strong>작성:</strong> WaveNet</p>
-          <p><strong>작성 일시:</strong> 2025년 11월</p>
-          <p style="margin-top: 15px; font-size: 0.9em">
-            본 리포트는 CSV 데이터 통합 분석을 통해 작성되었으며, 마케팅
-            의사결정을 지원하기 위한 전략적 인사이트를 제공합니다.
-          </p>
+        <div class="section-box" id="section10">
+          <h2>10. 종합 전략 및 결론: '30대 여성, 경기/인천 집중 공략' 🚀</h2>
+          <div class="insight-box">
+            <h4>💡 What (발견 사항)</h4>
+            <p>
+              캠페인 분석 결과, <strong>30대 후반(35-39세)</strong>,
+              <strong>여성</strong>, <strong>경기/인천 지역</strong>, 그리고
+              <strong>버거킹 이용자</strong> 그룹이 CTR 및 Lift 측면에서
+              <strong>가장 높은 효율</strong>을 보였습니다.
+            </p>
+
+            <h4>🔍 Why (원인 분석)</h4>
+            <p>
+              데이터는
+              <strong>'30대 여성, 특히 경기/인천 지역의 버거킹 이용자'</strong
+              >가 롯데리아 캠페인에 가장 잘 반응하는 핵심 페르소나임을 명확히
+              보여주고 있습니다. 이들은 가족 단위 소비가 활발하며, 실용적인 할인
+              혜택에 가장 민감하게 반응하는 핵심 구매력층입니다.
+            </p>
+
+            <h4>🚀 So What (전략적 시사점)</h4>
+            <ul>
+              <li>
+                <strong>마케팅 예산의 60% 이상</strong>을
+                <strong
+                  >'30대 여성(30-39세), 경기/인천 거주자, 버거킹/배달 앱
+                  이용자'</strong
+                >
+                세그먼트에 <strong>집중 투입</strong>하여 효율성을 극대화해야
+                합니다.
+              </li>
+              <li>
+                반응률이 낮은 <strong>20대 타겟</strong>에게는
+                <strong>'가성비 좋은 1인 메뉴'</strong> 등 제품 및 메시지를
+                재구성하여 CTR 개선을 위한 A/B 테스트를 진행하는 것을
+                제언합니다.
+              </li>
+              <li>
+                <strong>경기 부천시 원미구, 성남시 분당구, 안양시 만안구</strong
+                >를 <strong>초우수 타겟 지역</strong>으로 지정하여 발송량 증대
+                및 혜택 집중을 통해 매출 기여도를 극대화해야 합니다.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+      <!-- Footer -->
+      <div class="footer">
+        <p><strong>분석:</strong> wavenet</p>
+        <p><strong>분석일자:</strong> 2025년 11월</p>
+      </div>
     </div>
-
-    <script>
-      // Wait for Plotly to load
-      window.addEventListener("load", function () {
-        initCharts();
-      });
-
-      function initCharts() {
-        if (typeof Plotly === "undefined") {
-          console.log("Waiting for Plotly to load...");
-          setTimeout(initCharts, 100);
-          return;
-        }
-        console.log("Plotly loaded, rendering charts...");
-        renderAllPlots();
-      }
-
-      function renderAllPlots() {
-        // 캠페인별 성과 비교 차트
-        var campaignData = [
-          {
-            type: "bar",
-            name: "발송 수",
-            marker: { color: "#667eea" },
-            opacity: 0.8,
-            x: ["2차 캠페인", "1차 캠페인"],
-            y: [41240, 41230],
-            hovertemplate: "<b>%{x}</b><br>발송: %{y:,.0f}건<extra></extra>",
-            yaxis: "y",
-          },
-          {
-            type: "scatter",
-            name: "CTR (%)",
-            mode: "lines+markers",
-            line: { color: "#f5576c", width: 3 },
-            marker: { size: 10, symbol: "circle" },
-            x: ["2차 캠페인", "1차 캠페인"],
-            y: [0.98, 0.85],
-            hovertemplate: "<b>%{x}</b><br>CTR: %{y:.2f}%<extra></extra>",
-            yaxis: "y2",
-          },
-        ];
-
-        var campaignLayout = {
-          title: {
-            text: "<b>캠페인별 발송 및 CTR 비교</b>",
-            font: { size: 18 },
-          },
-          xaxis: { title: { text: "캠페인" } },
-          yaxis: {
-            title: { text: "발송 수", font: { color: "#667eea" } },
-            side: "left",
-          },
-          yaxis2: {
-            title: { text: "CTR (%)", font: { color: "#f5576c" } },
-            side: "right",
-            overlaying: "y",
-            range: [0, 1.2],
-          },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          legend: { orientation: "h", y: 1.15 },
-          shapes: [
-            {
-              type: "line",
-              xref: "paper",
-              yref: "y2",
-              x0: 0,
-              y0: 0.91,
-              x1: 1,
-              y1: 0.91,
-              line: { dash: "dash", color: "gray", width: 2 },
-            },
-          ],
-          annotations: [
-            {
-              xref: "paper",
-              yref: "y2",
-              x: 1,
-              y: 0.91,
-              text: "평균 CTR: 0.91%",
-              showarrow: false,
-              font: { color: "gray" },
-            },
-          ],
-        };
-
-        Plotly.newPlot("campaign_chart", campaignData, campaignLayout, {
-          responsive: true,
-        });
-
-        // 거주지 유형별 CTR 차트
-        var residenceData = [
-          {
-            type: "bar",
-            marker: {
-              color: ["#667eea", "#764ba2", "#f093fb", "#f5576c", "#ff9a76"],
-              line: { width: 1, color: "white" },
-            },
-            x: ["기타", "주택빌라원룸", "아파트", "알수없음", "오피스텔"],
-            y: [1.2, 0.99, 0.94, 0.86, 0.44],
-            text: ["1.20%", "0.99%", "0.94%", "0.86%", "0.44%"],
-            textposition: "outside",
-            hovertemplate: "거주지: %{x}<br>CTR: %{y:.2f}%<extra></extra>",
-          },
-        ];
-
-        var residenceLayout = {
-          title: { text: "<b>거주지 유형별 CTR 분석</b>", font: { size: 18 } },
-          xaxis: { title: { text: "거주지 유형" } },
-          yaxis: { title: { text: "CTR (%)" }, range: [0, 1.5] },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          shapes: [
-            {
-              type: "line",
-              xref: "paper",
-              yref: "y",
-              x0: 0,
-              y0: 0.89,
-              x1: 1,
-              y1: 0.89,
-              line: { dash: "dash", color: "gray", width: 2 },
-            },
-          ],
-        };
-
-        Plotly.newPlot("residence_chart", residenceData, residenceLayout, {
-          responsive: true,
-        });
-
-        // 시도별 CTR 차트
-        var sidoData = [
-          {
-            type: "bar",
-            x: [
-              "세종",
-              "대구",
-              "경남",
-              "광주",
-              "경기",
-              "강원",
-              "충남",
-              "전북",
-              "경북",
-              "서울",
-              "충북",
-              "제주",
-            ],
-            y: [
-              1.97, 1.26, 1.14, 1.11, 0.93, 0.89, 0.85, 0.76, 0.76, 0.75, 0.58,
-              0.33,
-            ],
-            text: [
-              "1.97%",
-              "1.26%",
-              "1.14%",
-              "1.11%",
-              "0.93%",
-              "0.89%",
-              "0.85%",
-              "0.76%",
-              "0.76%",
-              "0.75%",
-              "0.58%",
-              "0.33%",
-            ],
-            textposition: "outside",
-            hovertemplate: "시/도: %{x}<br>CTR: %{y:.2f}%<extra></extra>",
-            marker: {
-              color: [
-                1.97, 1.26, 1.14, 1.11, 0.93, 0.89, 0.85, 0.76, 0.76, 0.75,
-                0.58, 0.33,
-              ],
-              colorscale: [
-                [0, "#fff0e6"],
-                [0.5, "#ff9a76"],
-                [1, "#f5576c"],
-              ],
-              colorbar: { title: "CTR (%)" },
-            },
-          },
-        ];
-
-        var sidoLayout = {
-          title: { text: "<b>시/도별 CTR 성과 분석</b>", font: { size: 18 } },
-          xaxis: { title: { text: "시/도" } },
-          yaxis: { title: { text: "CTR (%)" }, range: [0, 2.3] },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          shapes: [
-            {
-              type: "line",
-              xref: "paper",
-              yref: "y",
-              x0: 0,
-              y0: 0.94,
-              x1: 1,
-              y1: 0.94,
-              line: { dash: "dash", color: "gray", width: 2 },
-            },
-          ],
-        };
-
-        Plotly.newPlot("sido_chart", sidoData, sidoLayout, {
-          responsive: true,
-        });
-
-        // 성별-연령별 히트맵
-        var genderAgeData = [
-          {
-            type: "heatmap",
-            z: [
-              [0.62, 0.77],
-              [1.39, 0.83],
-              [2.14, 1.82],
-              [2.25, 2.37],
-              [1.3, 1.45],
-              [1.83, 1.8],
-              [0, 0],
-              [0, 0],
-            ],
-            x: ["남성", "여성"],
-            y: [
-              "20-24",
-              "25-29",
-              "30-34",
-              "35-39",
-              "40-44",
-              "45-49",
-              "50-54",
-              "55-59",
-            ],
-            colorscale: "Viridis",
-            colorbar: { title: "CTR (%)" },
-            hovertemplate:
-              "<b>성별: %{x}</b><br><b>연령: %{y}</b><br>CTR: %{z:.2f}%<extra></extra>",
-          },
-        ];
-
-        var genderAgeLayout = {
-          title: { text: "<b>성별-연령별 CTR 히트맵</b>", font: { size: 18 } },
-          xaxis: { title: { text: "성별" } },
-          yaxis: { title: { text: "연령대" } },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-        };
-
-        Plotly.newPlot("gender_age_chart", genderAgeData, genderAgeLayout, {
-          responsive: true,
-        });
-
-        // 스테이지별 CTR 차트
-        var stageData = [
-          {
-            type: "bar",
-            x: ["유치원생부모", "고등학생부모", "유아부모", "고등학생"],
-            y: [1.77, 1.53, 1.44, 0.47],
-            text: ["1.77%", "1.53%", "1.44%", "0.47%"],
-            textposition: "outside",
-            hovertemplate: "스테이지: %{x}<br>CTR: %{y:.2f}%<extra></extra>",
-            marker: { color: ["#667eea", "#764ba2", "#f093fb", "#f5576c"] },
-          },
-        ];
-
-        var stageLayout = {
-          title: {
-            text: "<b>연령별 스테이지별 CTR 분석</b>",
-            font: { size: 18 },
-          },
-          xaxis: { title: { text: "스테이지" } },
-          yaxis: { title: { text: "CTR (%)" }, range: [0, 2.0] },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          shapes: [
-            {
-              type: "line",
-              xref: "paper",
-              yref: "y",
-              x0: 0,
-              y0: 1.3,
-              x1: 1,
-              y1: 1.3,
-              line: { dash: "dash", color: "gray", width: 2 },
-            },
-          ],
-        };
-
-        Plotly.newPlot("stage_chart", stageData, stageLayout, {
-          responsive: true,
-        });
-
-        // 푸드앱 사용자 차트
-        var foodAppData = [
-          {
-            type: "pie",
-            labels: ["롯데리아", "버거킹", "맥도날드", "배달의민족"],
-            values: [635, 21438, 37736, 66609],
-            name: "발송 볼륨",
-            hovertemplate:
-              "<b>%{label}</b><br>발송: %{value:,.0f}건<extra></extra>",
-            marker: { colors: ["#667eea", "#764ba2", "#f093fb", "#f5576c"] },
-            domain: { x: [0, 0.48] },
-            textinfo: "label+percent",
-            textposition: "inside",
-          },
-          {
-            type: "bar",
-            x: ["롯데리아", "버거킹", "맥도날드", "배달의민족"],
-            y: [1.26, 1.05, 0.89, 0.93],
-            name: "CTR",
-            hovertemplate: "<b>%{x}</b><br>CTR: %{y:.2f}%<extra></extra>",
-            marker: { color: ["#667eea", "#764ba2", "#f093fb", "#f5576c"] },
-            xaxis: "x2",
-            yaxis: "y2",
-          },
-        ];
-
-        var foodAppLayout = {
-          title: {
-            text: "<b>푸드 앱 사용자 분석 (발송 볼륨 vs CTR)</b>",
-            font: { size: 18 },
-          },
-          xaxis2: {
-            title: { text: "앱" },
-            domain: [0.52, 1],
-            anchor: "y2",
-          },
-          yaxis2: {
-            title: { text: "CTR (%)" },
-            domain: [0, 1],
-            anchor: "x2",
-          },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          showlegend: false,
-        };
-
-        Plotly.newPlot("food_app_chart", foodAppData, foodAppLayout, {
-          responsive: true,
-        });
-
-        // 세그먼트 상세 차트
-        var segmentData = [
-          {
-            type: "bar",
-            name: "클릭 수",
-            marker: { color: "#667eea" },
-            x: [
-              "여성 35-39",
-              "남성 35-39",
-              "남성 30-34",
-              "여성 45-49",
-              "여성 30-34",
-            ],
-            y: [215, 230, 266, 150, 210],
-            hovertemplate: "<b>%{x}</b><br>클릭: %{y:,.0f}건<extra></extra>",
-            yaxis: "y",
-          },
-          {
-            type: "scatter",
-            name: "CTR (%)",
-            mode: "lines+markers",
-            line: { color: "#f5576c", width: 3 },
-            marker: { size: 10 },
-            x: [
-              "여성 35-39",
-              "남성 35-39",
-              "남성 30-34",
-              "여성 45-49",
-              "여성 30-34",
-            ],
-            y: [2.37, 2.25, 2.14, 1.8, 1.82],
-            hovertemplate: "<b>%{x}</b><br>CTR: %{y:.2f}%<extra></extra>",
-            yaxis: "y2",
-          },
-        ];
-
-        var segmentLayout = {
-          title: {
-            text: "<b>Top 5 고객 세그먼트 성과 상세</b>",
-            font: { size: 18 },
-          },
-          xaxis: { title: { text: "세그먼트" } },
-          yaxis: {
-            title: { text: "클릭 수", font: { color: "#667eea" } },
-            side: "left",
-          },
-          yaxis2: {
-            title: { text: "CTR (%)", font: { color: "#f5576c" } },
-            side: "right",
-            overlaying: "y",
-          },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          legend: { orientation: "h", y: 1.15 },
-        };
-
-        Plotly.newPlot("segment_chart", segmentData, segmentLayout, {
-          responsive: true,
-        });
-
-        // 앱 카테고리별 CTR 차트
-        var appCatData = [
-          {
-            type: "bar",
-            x: [
-              "RealEstates",
-              "LifeStyle",
-              "Travel",
-              "Media",
-              "Video",
-              "Shopping",
-              "Commerce",
-              "Messenger",
-              "Portal",
-              "Finance",
-            ],
-            y: [3.85, 1.63, 1.48, 1.43, 1.25, 0.99, 0.95, 0.94, 0.94, 0.89],
-            text: [
-              "3.85%",
-              "1.63%",
-              "1.48%",
-              "1.43%",
-              "1.25%",
-              "0.99%",
-              "0.95%",
-              "0.94%",
-              "0.94%",
-              "0.89%",
-            ],
-            textposition: "outside",
-            hovertemplate: "카테고리: %{x}<br>CTR: %{y:.2f}%<extra></extra>",
-            marker: {
-              color: [
-                3.85, 1.63, 1.48, 1.43, 1.25, 0.99, 0.95, 0.94, 0.94, 0.89,
-              ],
-              colorscale: [
-                [0, "#e0f7fa"],
-                [0.5, "#667eea"],
-                [1, "#764ba2"],
-              ],
-              colorbar: { title: "CTR (%)" },
-            },
-          },
-        ];
-
-        var appCatLayout = {
-          title: {
-            text: "<b>사용앱 카테고리별 CTR 분석 (Top 10)</b>",
-            font: { size: 18 },
-          },
-          xaxis: { title: { text: "앱 카테고리" } },
-          yaxis: { title: { text: "CTR (%)" }, range: [0, 4.5] },
-          plot_bgcolor: "#fafafa",
-          font: { family: "Noto Sans KR, sans-serif" },
-          shapes: [
-            {
-              type: "line",
-              xref: "paper",
-              yref: "y",
-              x0: 0,
-              y0: 1.44,
-              x1: 1,
-              y1: 1.44,
-              line: { dash: "dash", color: "gray", width: 2 },
-            },
-          ],
-        };
-
-        Plotly.newPlot("app_cat_chart", appCatData, appCatLayout, {
-          responsive: true,
-        });
-      }
-
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        });
-      });
-    </script>
   </body>
 </html>
